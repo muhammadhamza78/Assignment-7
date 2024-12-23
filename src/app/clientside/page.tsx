@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Loading from "./Loading";
 
 interface Products {
@@ -27,7 +28,7 @@ const Page: React.FC = () => {
         if (!response.ok) throw new Error("Failed to fetch products");
         const fetchedData: Products[] = await response.json();
         setProducts(fetchedData);
-      } catch (error) {
+      } catch (_) {
         setError("Failed to load products. Please try again later.");
       } finally {
         setLoading(false);
@@ -59,9 +60,12 @@ const Page: React.FC = () => {
               className="flex flex-col h-[450px] bg-gradient-to-r from-gray-800 to-gray-900 text-white border border-gray-700 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl hover:border-blue-500"
             >
               <div className="w-full h-48 flex-shrink-0 overflow-hidden rounded-t-lg">
-                <img
+                <Image
                   src={product.image}
                   alt={`Image of ${product.title}`}
+                  width={400}
+                  height={400}
+                  unoptimized
                   className="w-full h-full object-contain p-4 hover:scale-110 transition-transform duration-300"
                 />
               </div>
