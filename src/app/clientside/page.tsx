@@ -28,7 +28,7 @@ const Page: React.FC = () => {
         if (!response.ok) throw new Error("Failed to fetch products");
         const fetchedData: Products[] = await response.json();
         setProducts(fetchedData);
-      } catch (_) {
+      } catch {
         setError("Failed to load products. Please try again later.");
       } finally {
         setLoading(false);
